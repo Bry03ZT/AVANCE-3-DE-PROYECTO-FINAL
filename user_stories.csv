@@ -1,0 +1,71 @@
+"Titulo","Descripción","Referencias visuales","Criterios de aceptación en formato test cases","Tareas","Estimación del esfuerzo (story points)","Prioridad","Etiquetas (labels)"
+"US-01 | Feature: Configuración base del sistema web y navegación MVP","Se necesita establecer la estructura base de la plataforma web, el layout y la navegación entre los módulos principales de Vendedor, Almacén y Repartidor.
+
+Como miembro del equipo operativo,
+quiero tener un layout consistente con menú de navegación,
+para acceder fácilmente a mi módulo correspondiente (Pedidos, Inventario, Entregas).","Dashboard principal
+Menú lateral o superior","- [ ] TC-01: El menú permite navegar a Pedidos, Inventario y Entregas.
+- [ ] TC-02: La vista seleccionada se resalta en el menú.
+- [ ] TC-03: La estructura es responsiva y funciona en celular y escritorio.","- [ ] FE-01: Crear proyecto web y estructura de carpetas
+- [ ] FE-02: Implementar layout base con Navbar / Sidebar
+- [ ] FE-03: Configurar enrutamiento (Routing) básico
+- [ ] QA-01: Validar correcta navegación en desktop y móvil","5","Alta","navegacion,frontend"
+"US-02 | Feature: Modelado de datos inicial (Pedidos, Inventario, Entregas)","Es necesario contar con la estructura de base de datos para almacenar productos, pedidos y entregas de Mueblería J & M.
+
+Como equipo de desarrollo,
+quiero definir y crear los modelos de datos,
+para permitir el registro de transacciones de manera persistente.","Diagrama ER","- [ ] TC-01: Las tablas de Pedidos, Productos y Entregas existen en BD.
+- [ ] TC-02: Un Pedido está asociado a uno o más Productos y tiene una Entrega programada.
+- [ ] TC-03: Los campos requeridos no permiten valores nulos.","- [ ] BE-01: Definir modelos de Producto, Pedido, Entrega
+- [ ] BE-02: Crear scripts de migración de base de datos
+- [ ] BE-03: Generar modelos y DTOs en el código backend","5","Alta","backend,database,modelo"
+"US-03 | Feature: Poblado de datos de prueba (Seed Data)","Para probar la plataforma, necesitamos un catálogo de muebles y algunos clientes/pedidos pre-cargados.
+
+Como usuario de prueba,
+quiero que el sistema ya tenga información al iniciar,
+para poder ver cómo interactúan los módulos de inventario y pedidos.","Lista de inventario","- [ ] TC-01: El inventario cuenta con al menos 10 muebles de prueba.
+- [ ] TC-02: Existen al menos 3 pedidos y entregas en estado pendiente.","- [ ] DB-01: Crear script de seed para catálogo de muebles
+- [ ] DB-02: Crear script de seed para pedidos de prueba
+- [ ] QA-01: Ejecutar script de seed y verificar datos en BD","3","Alta","backend,seed"
+"US-04 | Feature: Formulario de registro de Pedidos (Vendedor)","El Vendedor necesita ingresar de forma digital los pedidos que antes anotaba en cuadernos.
+
+Como Vendedor,
+quiero registrar un nuevo pedido con el mueble y los datos del cliente,
+para que el almacén y el repartidor estén notificados automáticamente.","Formulario de Nuevo Pedido","- [ ] TC-01: El formulario permite ingresar datos del cliente, dirección y muebles.
+- [ ] TC-02: No se puede guardar si faltan campos obligatorios.
+- [ ] TC-03: Al guardar, el pedido se lista en la tabla principal.","- [ ] FE-01: Crear formulario de registro de pedido
+- [ ] BE-01: Crear endpoint POST /api/pedidos
+- [ ] QA-01: Validar creación exitosa y validaciones de error","8","Alta","pedidos,frontend,backend"
+"US-05 | Feature: Listado de Inventario (Almacén)","El personal de almacén necesita ver la lista de muebles y su cantidad disponible.
+
+Como Encargado de Almacén,
+quiero ver el listado completo de productos con su stock actual,
+para saber la disponibilidad real sin hacer conteo físico constante.","Vista de Inventario","- [ ] TC-01: La lista muestra nombre del mueble, código y stock actual.
+- [ ] TC-02: Tiene una barra de búsqueda funcional por nombre de producto.","- [ ] FE-01: Implementar tabla de inventario
+- [ ] BE-01: Crear endpoint GET /api/productos
+- [ ] QA-01: Validar que se muestren los datos correctamente","5","Alta","inventario,frontend"
+"US-06 | Feature: Actualizar stock de muebles (Almacén)","Durante el Ciclo 1 descubrimos que editar stock debe ser muy visible y fácil.
+
+Como Encargado de Almacén,
+quiero un botón claro para modificar el stock de un mueble,
+para mantener el inventario al día de manera rápida.","Botón Editar en la lista de inventario","- [ ] TC-01: El botón de editar stock está visible junto a cada producto.
+- [ ] TC-02: Al cambiar el número, el stock se actualiza inmediatamente en BD.","- [ ] FE-01: Añadir modal o campo editable de cantidad
+- [ ] BE-01: Crear endpoint PATCH /api/productos/stock
+- [ ] QA-01: Probar incremento y decremento de cantidad","3","Media","inventario,frontend"
+"US-07 | Feature: Lista de entregas del día (Repartidor)","El Repartidor requiere una vista optimizada para móviles que muestre sus pendientes.
+
+Como Repartidor,
+quiero ver en mi celular las entregas programadas de hoy,
+para conocer mis rutas sin depender de WhatsApp.","Lista de entregas (Mobile-first)","- [ ] TC-01: La lista muestra dirección, cliente y pedido.
+- [ ] TC-02: Se adapta perfectamente al ancho de pantalla de celular (Mobile-first).","- [ ] FE-01: Crear vista de entregas enfocada en responsive (tarjetas)
+- [ ] BE-01: Crear endpoint GET /api/entregas/hoy
+- [ ] QA-01: Validar diseño en emulador de smartphone","5","Alta","entregas,mobile"
+"US-08 | Feature: Confirmar entrega (Repartidor)","Al llegar al domicilio, el repartidor debe cambiar el estado del pedido a entregado.
+
+Como Repartidor,
+quiero tener un botón accesible en la parte superior de la tarjeta de entrega,
+para marcarla como completada de inmediato.","Tarjeta de Entrega > Botón Confirmar","- [ ] TC-01: El botón Confirmar entrega está muy visible.
+- [ ] TC-02: Al pulsarlo, el estado de la entrega cambia a 'Completado'.
+- [ ] TC-03: La tarjeta completada desaparece o se oculta visualmente.","- [ ] FE-01: Implementar botón y lógica de cambio de estado
+- [ ] BE-01: Crear endpoint PATCH /api/entregas/estado
+- [ ] QA-01: Validar flujo de confirmación de entrega","5","Alta","entregas,frontend"
